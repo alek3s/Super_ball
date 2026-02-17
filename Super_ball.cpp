@@ -19,17 +19,16 @@ struct Tiragi
 {
     int id;      //идентификатор каждой записи - номер тиража
 
-    int Number_Day;//день тиража
-    int Number_Month;//месяц тиража
-    int Number_Year;//год тиража
+    int Date_Day;//день тиража
+    int Date_Month;//месяц тиража
+    int Date_Year;//год тиража
 
-    int Number_1;//выпавшие номера
-    int Number_2;
-    int Number_3;
-    int Number_4;
-    int Number_5;
-    int Number_6;
-
+    int Ball_1;//выпавшие номера
+    int Ball_2;
+    int Ball_3;
+    int Ball_4;
+    int Ball_5;
+    int Ball_6;  
 };
 
 //структура содержит все данные о шарах (все характеристики)
