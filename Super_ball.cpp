@@ -17,13 +17,13 @@ using namespace std;
 //структура содержит все данные о тиражах
 struct Tiragi
 {
-    int id;      //идентификатор каждой записи - номер тиража
+    int id;          //идентификатор каждой записи - номер тиража
 
-    int Date_Day;//день тиража
-    int Date_Month;//месяц тиража
-    int Date_Year;//год тиража
+    int Date_Day;   //день тиража
+    int Date_Month; //месяц тиража
+    int Date_Year;  //год тиража
 
-    int Ball_1;//выпавшие шары
+    int Ball_1;     //выпавшие шары
     int Ball_2;
     int Ball_3;
     int Ball_4;
