@@ -67,6 +67,7 @@ int main()
     int fff = 0;
     int meniu = 4;
     setlocale(LC_ALL, "rus");
+
     //создаем объект класса ofstream для записи в файл
     ofstream File_Write;
 
@@ -91,7 +92,7 @@ int main()
     File_Read.open("game.txt", ios::binary || ios::in);
     if (File_Read.is_open())
     {
-        meniu = 8;
+       //meniu = 8;
         Count_T = 0;
         while (!File_Read.eof())
         {
