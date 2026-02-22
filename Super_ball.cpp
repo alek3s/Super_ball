@@ -12,6 +12,7 @@
 #include <fstream>
 #include <windows.h>
 #include <stdio.h>
+#include <vector>
 
 #include <stdexcept> // для std::exception и его потомков
 
@@ -78,6 +79,7 @@ int main()
     cout << "Введите количество  тиражей " << '\n';
     cout << "SD_Tiragi -> ";
     cin >> SD_Tiragi;
+   // vector <Tiragi> D_Tiragi = vector <Tiragi>{};
     Tiragi* D_Tiragi = new Tiragi[SD_Tiragi];
 
     //создаем динамический масив структур шаров с их характеристиками
