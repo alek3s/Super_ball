@@ -50,7 +50,6 @@ struct Ball
 
 int SVector_Tiragi = 0;       //для ввода количества тиражей вручную
 int SD_Ball = 0;         //для ввода количества чисел, учавствующих в тираже
-int Count_T= 0;          //счетчик количества тиражей считаных из файла
 
 using namespace std;
 int main()
@@ -98,7 +97,7 @@ int main()
         //каждая строка в файле состоит из десяти чисел, разделенных табуляцией и точками
         //необходимо разобрать каждую строку и поместить все числа в соответствующие структуры структуры
         //паралельно с формированием структуры тиражей выводим результат работы алгоритма на экран
-        Count_T = 0;
+        
         while (!File_Read.eof())
         {
             File_Read >> buf;
@@ -172,9 +171,9 @@ int main()
                         cout << "\n";
                         str = "";
                         flag_2 = 1;//следующий проход это новая строка
-                        Count_T++;//считаем тиражи
+                        
                         Vector_Tiragi.push_back(Object_Struct_Tiragi);
-
+                        
                         break;
                     default:
                         break;
@@ -193,6 +192,7 @@ int main()
 
     //все готово для анализа 
     //структура с тиражами укомплектована, можно приступать к анализу
+
 
     while (1)
     {
@@ -219,41 +219,70 @@ int main()
         if (meniu == 1)//смотрим вес каждого шара в тиражах
         {
             //очищаем массив структур шаров
-            for (int a = 0; a < SD_Ball; a++)
+            for (size_t a = 0; a < SD_Ball; a++)
             {
                 D_Ball[a].Last = 0;
                 D_Ball[a].Often = 0.0;
                 D_Ball[a].Weight = 0;
                 D_Ball[a].YES = false;
             }
-            for (int a = 0; a < SD_Ball; a++)//выбираем первый шар
+
+            //перебираем все шары по очереди
+            for (size_t a = 0; a < SD_Ball; a++)
             {
-                for (int b = 0; b < Count_T; b++)//пересматриваем все тиражи и вычисляем вес и частоту каждого шара
+                //каждый шар сравниваем с выпавшими шарами в каждом тираже
+                //при равенстве увеличиваем вес номера соответствующего шара
+                for (size_t b = 0; b < Vector_Tiragi.size(); b++)
                 {
-                    if ((a + 1) == Vector_Tiragi[b].Ball_1) { D_Ball[a].Weight++; D_Ball[a].Often = (static_cast<double>(Count_T) / D_Ball[a].Weight); }
-                    if ((a + 1) == Vector_Tiragi[b].Ball_2) { D_Ball[a].Weight++; D_Ball[a].Often = (static_cast<double>(Count_T) / D_Ball[a].Weight); }
-                    if ((a + 1) == Vector_Tiragi[b].Ball_3) { D_Ball[a].Weight++; D_Ball[a].Often = (static_cast<double>(Count_T) / D_Ball[a].Weight); }
-                    if ((a + 1) == Vector_Tiragi[b].Ball_4) { D_Ball[a].Weight++; D_Ball[a].Often = (static_cast<double>(Count_T) / D_Ball[a].Weight); }
-                    if ((a + 1) == Vector_Tiragi[b].Ball_5) { D_Ball[a].Weight++; D_Ball[a].Often = (static_cast<double>(Count_T) / D_Ball[a].Weight); }
-                    if ((a + 1) == Vector_Tiragi[b].Ball_6) { D_Ball[a].Weight++; D_Ball[a].Often = (static_cast<double>(Count_T) / D_Ball[a].Weight); }
+
+                    if ((a + 1) == Vector_Tiragi[b].Ball_1)//сравниваем с первым выпавшим шаром
+                    { 
+                        D_Ball[a].Weight++;//увеличиваем показатель частоты выпадений (вес шара)
+                        D_Ball[a].Often = (static_cast<double>(Vector_Tiragi.size()) / D_Ball[a].Weight);
+                    }
+                    if ((a + 1) == Vector_Tiragi[b].Ball_2) //сравниваем со вторым выпавшим шаром
+                    { 
+                        D_Ball[a].Weight++;//увеличиваем показатель частоты выпадений (вес шара)
+                        D_Ball[a].Often = (static_cast<double>(Vector_Tiragi.size()) / D_Ball[a].Weight); 
+                    }
+                    if ((a + 1) == Vector_Tiragi[b].Ball_3) //сравниваем с третьим выпавшим шаром
+                    { 
+                        D_Ball[a].Weight++;//увеличиваем показатель частоты выпадений (вес шара)
+                        D_Ball[a].Often = (static_cast<double>(Vector_Tiragi.size()) / D_Ball[a].Weight);
+                    }
+                    if ((a + 1) == Vector_Tiragi[b].Ball_4)//сравниваем с четвертым выпавшим шаром
+                    { 
+                        D_Ball[a].Weight++; //увеличиваем показатель частоты выпадений (вес шара)
+                        D_Ball[a].Often = (static_cast<double>(Vector_Tiragi.size()) / D_Ball[a].Weight);
+                    }
+                    if ((a + 1) == Vector_Tiragi[b].Ball_5) //сравниваем с пятым выпавшим шаром
+                    { 
+                        D_Ball[a].Weight++; //увеличиваем показатель частоты выпадений (вес шара)
+                        D_Ball[a].Often = (static_cast<double>(Vector_Tiragi.size()) / D_Ball[a].Weight);
+                    }
+                    if ((a + 1) == Vector_Tiragi[b].Ball_6) //сравниваем с шестым выпавшим шаром
+                    { 
+                        D_Ball[a].Weight++; //увеличиваем показатель частоты выпадений (вес шара)
+                        D_Ball[a].Often = (static_cast<double>(Vector_Tiragi.size()) / D_Ball[a].Weight); 
+                    }
                 }
             }
             //ищем сколько тиражей прошло после последнего выпадания
-            for (int a = 0; a < SD_Ball; a++)
+            for (size_t a = 0; a < SD_Ball; a++)
             {
-                for (int b = Count_T - 1; b >= 0; b--)//пересматриваем все тиражи
+                for (size_t b = Vector_Tiragi.size() - 1; b >= 0; b--)//пересматриваем все тиражи
                 {
 
-                    if ((a + 1) == Vector_Tiragi[b].Ball_1) { D_Ball[a].Last = Count_T - b; break; }
-                    if ((a + 1) == Vector_Tiragi[b].Ball_2) { D_Ball[a].Last = Count_T - b; break; }
-                    if ((a + 1) == Vector_Tiragi[b].Ball_3) { D_Ball[a].Last = Count_T - b; break; }
-                    if ((a + 1) == Vector_Tiragi[b].Ball_4) { D_Ball[a].Last = Count_T - b; break; }
-                    if ((a + 1) == Vector_Tiragi[b].Ball_5) { D_Ball[a].Last = Count_T - b; break; }
-                    if ((a + 1) == Vector_Tiragi[b].Ball_6) { D_Ball[a].Last = Count_T - b; break; }
+                    if ((a + 1) == Vector_Tiragi[b].Ball_1) { D_Ball[a].Last = Vector_Tiragi.size() - b; break; }
+                    if ((a + 1) == Vector_Tiragi[b].Ball_2) { D_Ball[a].Last = Vector_Tiragi.size() - b; break; }
+                    if ((a + 1) == Vector_Tiragi[b].Ball_3) { D_Ball[a].Last = Vector_Tiragi.size() - b; break; }
+                    if ((a + 1) == Vector_Tiragi[b].Ball_4) { D_Ball[a].Last = Vector_Tiragi.size() - b; break; }
+                    if ((a + 1) == Vector_Tiragi[b].Ball_5) { D_Ball[a].Last = Vector_Tiragi.size() - b; break; }
+                    if ((a + 1) == Vector_Tiragi[b].Ball_6) { D_Ball[a].Last = Vector_Tiragi.size() - b; break; }
                 }
             }
             //анализируем наиболее вероятные шары к выпаданию в следующем тираже (которые давно не выпадали)
-            for (int a = 0; a < SD_Ball; a++)
+            for (size_t a = 0; a < SD_Ball; a++)
             {
 
                 if (0 > (D_Ball[a].Often - static_cast<double>(D_Ball[a].Last)))
@@ -274,13 +303,13 @@ int main()
             //очищаем экран
             system("cls");
             cout << "Файл  '1.txt'  открыт, началась запись. " << "\n";
-            for (int a = 0; a < 49; a++)//выводим масив
+            for (size_t a = 0; a < 49; a++)//выводим масив
                 // который показывает сколько раз за все тиражы выпадало определенный шар
             {
                 File_Write << "    " << a << "    " << "Шар номер" << "    " << a + 1 << "   " << "выпадал" << "  " << D_Ball[a].Weight << "  " << "раз" << '\n';
             }
             //выводим результат поиска выпадания двух чисел (вес и частоту)
-            for (int j = 0; j < 49; j++)
+            for (size_t j = 0; j < 49; j++)
             {
                 if (D_Ball[j].Weight > 0)
                 {
@@ -300,7 +329,7 @@ int main()
                 }
             }
             //выводим результат наиболее ожидаемых вероятных шаров одиночек
-            for (int j = 0; j < 49; j++)
+            for (size_t j = 0; j < 49; j++)
             {
                 if (D_Ball[j].YES == true)
                 {
@@ -353,7 +382,7 @@ int main()
                     DinamichMasiv[i].Ball_2 = b;
                     DinamichMasiv[i].Count_T = 0;
 
-                    for (c = 0; c < Count_T; c++)//пересматриваем все тиражи
+                    for (c = 0; c < Vector_Tiragi.size(); c++)//пересматриваем все тиражи
                     {
                         if (a == Vector_Tiragi[c].Ball_1)
                         {
@@ -526,7 +555,7 @@ int main()
                 return 1; // выполнить выход из программы
             }
 
-            for (int c = 0; c < Count_T; c++)// идем по тиражам
+            for (int c = 0; c < Vector_Tiragi.size(); c++)// идем по тиражам
             {
                 //очищаем массив структур шаров
                 for (int a = 0; a < SD_Ball; a++)
@@ -612,7 +641,7 @@ int main()
                     bool one = false;//первое нахождение
                     bool two = false;//второе нахождение
                     int poz = 0;//предыдущая позиция(номер тиража)
-                    for (int C = 0; C < Count_T; C++)//прогоняем по тиражам
+                    for (int C = 0; C < Vector_Tiragi.size(); C++)//прогоняем по тиражам
                     {
                         if ((a + 1) == Vector_Tiragi[c].Ball_1)
                         {
