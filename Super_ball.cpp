@@ -73,6 +73,7 @@ int main()
 
     string str;
     
+
     //Объект структуры Tiragi
     Tiragi Object_Struct_Tiragi{}; 
 
