@@ -49,9 +49,10 @@ struct Ball
 int SVector_Tiragi = 0;       //для ввода количества тиражей вручную
 int SD_Ball = 0;         //для ввода количества чисел, учавствующих в тираже
 
-using namespace std;
+
 int main()
 {
+    using namespace std;
     char buf;           //промежуточный буфер
 
     int flag = 1;       // флаг отслеживания табуляции, разрыва цыфр и перехода на новую строку
